@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/rocont-test',
+  base: '/itmo_analytics',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
