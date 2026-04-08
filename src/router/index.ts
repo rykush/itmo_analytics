@@ -8,13 +8,12 @@ import Welcome from '@/pages/welcome/Welcome.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', component: Welcome },
+    { path: '/', component: BooksList },
     { path: '/add', component: FormAdd },
     { path: '/edit/:id', component: FormEdit },
     { path: '/welcome', component: Welcome }
   ]
 });
-
 
 router.afterEach((to: RouteLocationNormalized, from: RouteLocationNormalized) => {
   const ymFunction = (window as any).ym;

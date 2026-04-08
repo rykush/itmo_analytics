@@ -104,6 +104,8 @@
       </div>
     </div>
 
+    <router-view />
+
     <div class="relative max-w-full overflow-y-auto w-full mt-4 desktop:mb-4 tablet:mb-4 mobile:mb-14 mb-14 flex flex-col items-center">
       <div class="relative desktop:w-[944px] tablet:w-[624px] mobile:w-[424px] w-[280px] flex flex-col items-center">
         <BooksList :filtered-books="filteredBooks"/>

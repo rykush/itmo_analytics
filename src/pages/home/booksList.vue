@@ -52,14 +52,14 @@ const addToFavorite = (id: string) => {
         <div class="flex gap-2">
           <button @click="markAsRead(id)" class="w-8 h-8 flex items-center justify-center">
             <img
-              :src="book.isRead ? '"@/shared/icons/readActive.svg' : '"@/shared/icons/readInactive.svg'"
+              :src="book.isRead ? '../../src/shared/icons/readActive.svg' : '../../src/shared/icons/readInactive.svg'"
               :alt="book.isRead ? 'Прочитано' : 'Не прочитано'"
               class="w-5 h-5"
             />
           </button>
           <button @click="addToFavorite(id)" class="w-8 h-8 flex items-center justify-center">
             <img
-              :src="book.isFavorite ? '"@/shared/icons/favoriteActive.svg' : '"@/shared/icons/favoriteInactive.svg'"
+              :src="book.isFavorite ? '../../src/shared/icons/favoriteActive.svg' : '../../src/shared/icons/favoriteInactive.svg'"
               :alt="book.isFavorite ? 'В избранном' : 'Добавить в избранное'"
               class="w-5 h-5"
             />
