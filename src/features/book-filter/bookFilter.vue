@@ -1,79 +1,103 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+const emit = defineEmits<{
+  (e: "apply", filters: {
+    author: string;
+    genre: string;
+    year: string;
+    isRead: boolean;
+    isFavorite: boolean;
+  }): void;
+}>();
+
 const filters = ref({
-  isRead: false,
-  isFavorite: false,
+  author: '',
   genre: '',
-  yearFrom: '',
-  yearTo: ''
+  year: '',
+  isRead: false,
+  isFavorite: false
 });
 
-const emit = defineEmits(['apply']);
-
 const applyFilter = () => {
-  emit('apply', filters.value);
+  emit('apply', { ...filters.value });
 
   if ((window as any).ym) {
-    (window as any).ym(108437493, 'reachGoal', 'filter_applied');
+    (window as any).ym(108437493, 'reachGoal', 'filter_applied', {
+      filters: filters.value
+    });
   }
 };
 
 const resetFilters = () => {
   filters.value = {
-    isRead: false,
-    isFavorite: false,
+    author: '',
     genre: '',
-    yearFrom: '',
-    yearTo: ''
+    year: '',
+    isRead: false,
+    isFavorite: false
   };
+
+  emit('apply', { ...filters.value });
 };
 </script>
 
 <template>
-  <div class="p-4 bg-layer rounded-lg mb-4">
-    <h3 class="text-lg font-semibold mb-3">Фильтры</h3>
-    <div class="grid grid-cols-1 gap-3">
-      <label class="flex items-center">
-        <input type="checkbox" v-model="filters.isRead" class="mr-2" />
-        Прочитано
+  <div class="w-full bg-layer rounded-xl mb-4 p-3">
+
+    <h3 class="text-lg font-semibold mb-2">Фильтры</h3>
+
+    <div class="flex items-center gap-3 overflow-x-auto pb-2">
+
+      <label class="flex items-center gap-2 whitespace-nowrap">
+        <input type="checkbox" v-model="filters.isRead" />
+        <span class="text-sm">Прочитано</span>
       </label>
-      <label class="flex items-center">
-        <input type="checkbox" v-model="filters.isFavorite" class="mr-2" />
-        Избранное
+
+      <label class="flex items-center gap-2 whitespace-nowrap">
+        <input type="checkbox" v-model="filters.isFavorite" />
+        <span class="text-sm">Избранное</span>
       </label>
+
+      <input
+        type="text"
+        v-model="filters.author"
+        placeholder="Автор"
+        class="min-w-[140px] h-[36px] px-3 border rounded-lg text-sm bg-white"
+      />
+
       <input
         type="text"
         v-model="filters.genre"
         placeholder="Жанр"
-        class="p-2 border rounded"
+        class="min-w-[140px] h-[36px] px-3 border rounded-lg text-sm bg-white"
       />
+
       <input
         type="number"
-        v-model="filters.yearFrom"
-        placeholder="Год от"
-        class="p-2 border rounded"
+        v-model="filters.year"
+        placeholder="Год"
+        class="w-[90px] h-[36px] px-2 border rounded-lg text-sm bg-white"
       />
-      <input
-        type="number"
-        v-model="filters.yearTo"
-        placeholder="Год до"
-        class="p-2 border rounded"
-      />
-    </div>
-    <div class="mt-3 flex gap-2">
-      <button
-        @click="applyFilter"
-        class="px-4 py-2 bg-green text-white rounded hover:bg-greenHover"
-      >
-        Применить
-      </button>
-      <button
-        @click="resetFilters"
-        class="px-4 py-2 bg-red text-white rounded hover:bg-redHover"
-      >
-        Сбросить
-      </button>
+
+      <div class="flex gap-2 shrink-0">
+
+        <button
+          @click="applyFilter"
+          class="px-4 h-[36px] bg-green text-white rounded-lg hover:bg-greenHover transition"
+        >
+          Применить
+        </button>
+
+        <button
+          @click="resetFilters"
+          class="px-4 h-[36px] bg-red text-white rounded-lg hover:bg-redHover transition"
+        >
+          Сбросить
+        </button>
+
+      </div>
+
     </div>
   </div>
 </template>
