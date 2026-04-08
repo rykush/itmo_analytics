@@ -15,28 +15,36 @@ const author = ref('')
 const year = ref('')
 const genre = ref('')
 const isAgree = ref(false)
-const isFirstSession = sessionStorage.getItem('first_session_done');
 
-if ((window as any).ym) {
-  (window as any).ym(
-    108437493,
-    'reachGoal',
-    isFirstSession ? 'book_added_first_session' : 'book_added_return'
-  );
-}
 
 const formSubmit = () => {
-  bookStore.clearErrors()
+  bookStore.clearErrors();
 
-  let validation = bookValidator(name.value, author.value, genre.value, year.value, bookStore.errors)
+  let validation = bookValidator(
+    name.value,
+    author.value,
+    genre.value,
+    year.value,
+    bookStore.errors
+  );
 
   if (!validation.hasError && isAgree.value) {
 
+    const isFirstSession = !sessionStorage.getItem('first_session_done');
+
     if ((window as any).ym) {
-      (window as any).ym(108437493, 'reachGoal', 'book_added');
+      (window as any).ym(
+        108437493,
+        'reachGoal',
+        isFirstSession
+          ? 'book_added_first_session'
+          : 'book_added_return'
+      );
     }
 
-    const newId = bookStore.getNewID()
+    sessionStorage.setItem('first_session_done', 'true');
+
+    const newId = bookStore.getNewID();
 
     bookStore.books[newId] = {
       name: name.value,
@@ -47,17 +55,16 @@ const formSubmit = () => {
       isFavorite: false
     };
 
-    bookStore.setBooks()
+    bookStore.setBooks();
     props.dialog?.close();
 
-    name.value = ''
-    author.value = ''
-    year.value = ''
-    genre.value = ''
-
-    isAgree.value = false
+    name.value = '';
+    author.value = '';
+    year.value = '';
+    genre.value = '';
+    isAgree.value = false;
   } else {
-    bookStore.setErrors(validation.newErrors)
+    bookStore.setErrors(validation.newErrors);
   }
 };
 

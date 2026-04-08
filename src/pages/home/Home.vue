@@ -6,18 +6,31 @@ import { type bookData } from "@/entities/book/bookTypes";
 
 const bookStore = useBookStore();
 const searchQuery = ref('');
+const activeFilters = ref(null);
 
+const handleFilter = (filters) => {
+  activeFilters.value = filters;
+};
 const filteredBooks = computed(() => {
-  if (!searchQuery.value) return bookStore.books;
+  let books = Object.entries(bookStore.books);
 
-  const query = searchQuery.value.toLowerCase();
+  if (activeFilters.value) {
+    const f = activeFilters.value;
 
-  return Object.fromEntries(
-    Object.entries(bookStore.books).filter(([, book]) => {
-      const typedBook = book as bookData;
-      return typedBook.name.toLowerCase().includes(query);
-    })
-  );
+    books = books.filter(([, book]) => {
+      const b = book as bookData;
+
+      if (f.isRead && !b.isRead) return false;
+      if (f.isFavorite && !b.isFavorite) return false;
+      if (f.genre && !b.genre.toLowerCase().includes(f.genre.toLowerCase())) return false;
+      if (f.yearFrom && +b.year < +f.yearFrom) return false;
+      if (f.yearTo && +b.year > +f.yearTo) return false;
+
+      return true;
+    });
+  }
+
+  return Object.fromEntries(books);
 });
 </script>
 
@@ -25,7 +38,7 @@ const filteredBooks = computed(() => {
   <div class="relative max-w-full overflow-y-auto w-full flex flex-col items-center">
 
     <div class="relative desktop:w-[944px] tablet:w-[624px] mobile:w-[424px] w-[280px] flex flex-col items-center">
-
+      <BookFilter @apply="handleFilter" />
       <BooksList 
         :filtered-books="filteredBooks" 
         :search-query="searchQuery"

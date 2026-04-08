@@ -9,8 +9,12 @@ const continueToApp = () => {
   if ((window as any).ym) {
     (window as any).ym(108437493, 'reachGoal', 'welcome_page_continue');
   }
+
   localStorage.setItem('visited', 'true');
-  router.push('/');
+
+  setTimeout(() => {
+    router.push('/');
+  }, 150);
 };
 
 onMounted(() => {
