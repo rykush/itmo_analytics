@@ -41,7 +41,9 @@ const formSubmit = () => {
       name: name.value,
       author: author.value,
       year: year.value,
-      genre: genre.value
+      genre: genre.value,
+      isRead: bookStore.books[props.id]?.isRead || false,
+      isFavorite: bookStore.books[props.id]?.isFavorite || false
     };
 
     bookStore.setBooks()

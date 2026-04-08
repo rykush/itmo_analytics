@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { useBookStore } from "@/entities/book/bookStore";
+import { ref } from "vue";
 
-const bookStore = useBookStore();
 const filters = ref({
   isRead: false,
   isFavorite: false,
@@ -17,7 +15,6 @@ const applyFilter = () => {
       filters: filters.value
     });
   }
-
 };
 
 const resetFilters = () => {

@@ -2,18 +2,12 @@
 import AppButton from "@/shared/ui/AppButton.vue";
 
 const continueToApp = () => {
-  localStorage.setItem('visited', 'true');
-  window.location.href = '/';
-};
-
-const continueToApp = () => {
   if ((window as any).ym) {
     (window as any).ym(108437493, 'reachGoal', 'welcome_page_continue');
   }
   localStorage.setItem('visited', 'true');
   window.location.href = '/';
 };
-
 </script>
 
 <template>
