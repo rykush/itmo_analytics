@@ -4,8 +4,13 @@ import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from '../router';
 
-const app = createApp(App);
+const isFirstVisit = !localStorage.getItem('visited');
 
+if (isFirstVisit) {
+  router.push('/welcome');
+}
+
+const app = createApp(App);
 app.use(createPinia());
 app.use(router);
 app.mount('#app');

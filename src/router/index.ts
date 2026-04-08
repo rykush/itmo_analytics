@@ -3,13 +3,15 @@ import type { RouteLocationNormalized } from 'vue-router'; // тип для ху
 import BooksList from '@/pages/home/booksList.vue';
 import FormAdd from '@/features/add-book/formAdd.vue';
 import FormEdit from '@/features/edit-book/formEdit.vue'; // если есть
+import Welcome from '@/pages/welcome/Welcome.vue';
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: BooksList },
     { path: '/add', component: FormAdd },
-    { path: '/edit/:id', component: FormEdit }
+    { path: '/edit/:id', component: FormEdit },
+    { path: '/welcome', component: Welcome }
   ]
 });
 

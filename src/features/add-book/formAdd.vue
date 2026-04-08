@@ -23,6 +23,10 @@ const formSubmit = () => {
 
   if (!validation.hasError && isAgree.value) {
 
+    if ((window as any).ym) {
+      (window as any).ym(108437493, 'reachGoal', 'book_added');
+    }
+
     const newId = bookStore.getNewID()
 
     bookStore.books[newId] = {

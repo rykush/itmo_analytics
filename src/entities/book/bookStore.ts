@@ -47,6 +47,16 @@ export const useBookStore = defineStore('samples', () => {
         return `book_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
     }
 
+    const markAsRead = (id: string) => {
+        books.value[id].isRead = true;
+        setBooks();
+    };
+
+    const addToFavorite = (id: string) => {
+        books.value[id].isFavorite = true;
+        setBooks();
+    };
+
     return {
         books,
         errors,
@@ -57,5 +67,7 @@ export const useBookStore = defineStore('samples', () => {
         getBooks,
         setErrors,
         getNewID,
+        markAsRead,
+        addToFavorite
     }
 });
