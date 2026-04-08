@@ -14,8 +14,7 @@ const router = createRouter({
     { path: '/edit/:id', component: FormEdit }
   ]
 });
-
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   console.log('GUARD WORKS →', to.path);
 
   const isFirstVisit = !localStorage.getItem('visited');

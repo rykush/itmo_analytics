@@ -19,12 +19,6 @@ const searchQuery = ref("");
 
 const isWelcomePage = computed(() => route.path === "/welcome");
 
-const truncatedSearchQuery = computed(() => {
-  const maxLength = 20;
-  return searchQuery.value.length > maxLength
-    ? searchQuery.value.slice(0, maxLength) + "..."
-    : searchQuery.value;
-});
 
 let lastWidth = window.innerWidth;
 
