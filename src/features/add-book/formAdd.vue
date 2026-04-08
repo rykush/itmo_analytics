@@ -15,6 +15,15 @@ const author = ref('')
 const year = ref('')
 const genre = ref('')
 const isAgree = ref(false)
+const isFirstSession = sessionStorage.getItem('first_session_done');
+
+if ((window as any).ym) {
+  (window as any).ym(
+    108437493,
+    'reachGoal',
+    isFirstSession ? 'book_added_first_session' : 'book_added_return'
+  );
+}
 
 const formSubmit = () => {
   bookStore.clearErrors()

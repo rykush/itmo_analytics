@@ -30,9 +30,9 @@ export const useBookStore = defineStore('samples', () => {
     };
 
     const setBooks = () => {
-        localStorage.setItem('books', JSON.stringify(books.value))
+        localStorage.setItem('books', JSON.stringify(books.value));
         getBooks();
-    }
+    };
 
     const deleteBook = async (id: string) => {
         delete books.value[id];

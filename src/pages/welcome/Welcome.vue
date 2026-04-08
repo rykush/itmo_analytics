@@ -1,13 +1,23 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
 import AppButton from "@/shared/ui/AppButton.vue";
+
+const router = useRouter();
 
 const continueToApp = () => {
   if ((window as any).ym) {
     (window as any).ym(108437493, 'reachGoal', 'welcome_page_continue');
   }
   localStorage.setItem('visited', 'true');
-  window.location.href = '/';
+  router.push('/');
 };
+
+onMounted(() => {
+  if ((window as any).ym) {
+    (window as any).ym(108437493, 'reachGoal', 'welcome_page_view');
+  }
+});
 </script>
 
 <template>
@@ -20,6 +30,8 @@ const continueToApp = () => {
       <li>Добавлять новые книги</li>
       <li>Редактировать и удалять книги</li>
     </ul>
-    <AppButton :isAdd="true" text="Начать работу" @btn-click="continueToApp" />
+    <div class="min-w-[157px]">
+      <AppButton :isAdd="true" text="Начать работу" @btn-click="continueToApp" />
+    </div>
   </div>
 </template>
