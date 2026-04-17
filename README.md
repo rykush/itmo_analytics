@@ -1,5 +1,1 @@
-Оригинальный разработчик проекта https://github.com/Jushoru
-
-Оригинал проекта https://github.com/Jushoru/rocont-test/tree/main
-
-Данная копия была создана для проведения аналитики сайта, через сервис "Яндекс Метрика"
+Запуск проекта для просмотра https://rykush.github.io/itmo_analytics/
